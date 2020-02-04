@@ -50,12 +50,12 @@ public class TicTacToeTest {
 
     @Test
     public void horizontalWinnerXWins() throws Exception {
-        assertEquals(Evaluation.Owins, TicTacToe.evaluateBoard("XXXOO...."));
+        assertEquals(Evaluation.Xwins, TicTacToe.evaluateBoard("XXXOO...."));
     }
 
     @Test
     public void horizontalWinnerOWins() throws Exception {
-        assertEquals(Evaluation.Xwins, TicTacToe.evaluateBoard("..XOOOXX."));
+        assertEquals(Evaluation.Owins, TicTacToe.evaluateBoard("..XOOOXX."));
     }
 
     @Test
