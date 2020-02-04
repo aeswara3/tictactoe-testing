@@ -3,6 +3,42 @@ package student.tictactoe;
 import student.tictactoe.Evaluation;
 
 public class TicTacToe {
+    static int numberOfTiles = 9;
+    public static Evaluation evaluateBoard(String boardState) {
+        boardState = boardState.toLowerCase();
+        if (boardState.length() != numberOfTiles) {
+            return Evaluation.InvalidInput;
+        }
+        int numX = 0;
+        int numO = 0;
+        for (int i = 0; i < numberOfTiles; i++) {
+            if (boardState.charAt(i) == 'x') {
+                numX++;
+            } else if (boardState.charAt(i) == 'o') {
+                numO++;
+            }
+        }
+        if ((numX - numO) != 0 && (numX - numO) != 1) {
+            return Evaluation.UnreachableState;
+        }
+
+        if (checkWinner(boardState, 'x') && checkWinner(boardState, 'o')) {
+            return Evaluation.UnreachableState;
+        }
+        if (checkWinner(boardState, 'x') && numX == numO) {
+            return Evaluation.UnreachableState;
+        }
+        if (checkWinner(boardState, 'o') && numX > numO) {
+            return Evaluation.UnreachableState;
+        }
+        if (checkWinner(boardState, 'x')) {
+            return Evaluation.Xwins;
+        }
+        if (checkWinner(boardState, 'o')) {
+            return Evaluation.Owins;
+        }
+        return Evaluation.NoWinner;
+    }
     public static boolean checkWinner(String boardState, char player) {
         return checkVertical(boardState, player) || checkHorizontal(boardState, player)
                 || checkDiagonal(boardState, player);
